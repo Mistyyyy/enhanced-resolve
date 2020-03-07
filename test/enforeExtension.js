@@ -14,11 +14,9 @@ const resolver = ResolverFactory.createResolver({
 const fixture = path.resolve(__dirname, "fixtures", "extensions");
 
 describe("enforceExtension", function() {
-	it("should throw an error because no extension be provided", function(done) {
+	it("should not resolve ro file when ext of file is missing", function(done) {
 		resolver.resolve({}, fixture, "./foo", {}, (err, result) => {
-			err.should.be.an.Error;
-			const message = err.message;
-			message.should.startWith("Can't resolve './foo' in");
+			err.should.be.instanceof(Error);
 			done();
 		});
 	});
